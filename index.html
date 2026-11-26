@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +35,7 @@
     }
     button, input, select, textarea { font: inherit; }
     button { cursor: pointer; }
-    .container { max-width: 820px; margin: 0 auto; padding: 12px 12px 86px; }
+    .container { max-width: 840px; margin: 0 auto; padding: 12px 12px 88px; }
     .card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -48,7 +49,7 @@
     .wrap { flex-wrap: wrap; }
     .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
     .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    @media (max-width: 540px) {
+    @media (max-width: 560px) {
       .grid-3 { grid-template-columns: 1fr; }
     }
     .badge {
@@ -79,11 +80,13 @@
       transition: opacity 0.15s, transform 0.1s;
     }
     .btn:active { transform: scale(0.98); }
+    .btn:disabled { opacity: 0.55; cursor: not-allowed; }
     .btn-sm { padding: 6px 10px; font-size: 12px; border-radius: 10px; }
     .btn-block { width: 100%; }
     .btn-primary { background: var(--primary); color: #fff; }
     .btn-dark { background: #0f172a; color: #fff; }
     .btn-wa { background: #16a34a; color: #fff; }
+    .btn-blast { background: linear-gradient(135deg, #059669 0%, #0f766e 100%); color: #fff; box-shadow: 0 2px 8px rgba(5, 150, 105, 0.28); }
     .btn-danger { background: var(--danger-bg); color: var(--danger); border-color: #fecaca; }
     .btn-outline { background: #fff; color: #1e293b; border-color: #cbd5e1; }
     .btn-ghost { background: #f8fafc; color: #334155; border-color: #e2e8f0; }
@@ -126,7 +129,7 @@
       padding: 10px 14px;
       border-bottom: 1px solid #1e293b;
     }
-    .topbar-inner { max-width: 820px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .topbar-inner { max-width: 840px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     .avatar {
       width: 40px;
       height: 40px;
@@ -201,22 +204,22 @@
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(15, 23, 42, 0.65);
+      background: rgba(15, 23, 42, 0.68);
       z-index: 50;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 14px;
+      padding: 12px;
     }
     .modal-box {
       background: #fff;
       border-radius: 18px;
       width: 100%;
-      max-width: 500px;
-      max-height: 88vh;
+      max-width: 560px;
+      max-height: 90vh;
       overflow-y: auto;
       padding: 16px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.28);
     }
     .toast {
       position: fixed;
@@ -230,7 +233,7 @@
       font-size: 13px;
       font-weight: 700;
       z-index: 60;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.22);
       max-width: 92vw;
       text-align: center;
     }
@@ -258,10 +261,44 @@
       background: #f8fafc;
       border: 1px solid #cbd5e1;
       border-radius: 12px;
-      padding: 12px;
-      font-size: 13px;
+      padding: 11px;
+      font-size: 12.5px;
       font-family: inherit;
-      margin: 10px 0;
+      margin: 8px 0;
+    }
+    .review-list {
+      max-height: 210px;
+      overflow-y: auto;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 6px;
+      background: #f8fafc;
+      margin: 8px 0;
+    }
+    .review-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 7px 8px;
+      border-radius: 9px;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      margin-bottom: 5px;
+      font-size: 12.5px;
+    }
+    .progress-bar-wrap {
+      width: 100%;
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 8px 0;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: #059669;
+      transition: width 0.2s ease;
     }
   </style>
 </head>
@@ -270,7 +307,7 @@
     <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:sans-serif;color:#334155;padding:20px;text-align:center;">
       <div>
         <div style="font-size:20px;font-weight:800;margin-bottom:6px;">Loading FeePulse Portal...</div>
-        <div style="font-size:13px;color:#64748b;">If this screen stays visible, make sure the entire HTML file was pasted completely.</div>
+        <div style="font-size:13px;color:#64748b;">If this screen stays visible, please ensure the entire index.html file was copied completely.</div>
       </div>
     </div>
   </div>
@@ -317,6 +354,7 @@
               id: 'apex-nirmal',
               code: 'APEX1',
               name: 'Apex Coaching Academy',
+              tagline: 'IIT-JEE, NEET & Board Foundation',
               city: 'Nirmal, Telangana',
               phone: '9848022334',
               upiId: 'apexacademy@okicici',
@@ -326,7 +364,7 @@
               logoUrl: '',
               lang: 'en-te',
               waMode: 'mobile',
-              cloudApi: { phoneNumberId: '', accessToken: '' },
+              cloudApi: { phoneNumberId: '', accessToken: '', templateName: '' },
               classes: [
                 { id: 'c1', name: '10th Board', sections: ['Morning A', 'Evening B'], defaultFee: 1800 },
                 { id: 'c2', name: 'Inter 1st Yr MPC', sections: ['Section A', 'Section B'], defaultFee: 2800 },
@@ -385,7 +423,7 @@
                   { time: '09:40 AM', type: 'Paid', student: 'Keerthana Rao', text: 'Paid Rs.3,750 via UPI (Settled)' }
                 ],
                 [YESTERDAY]: [
-                  { time: '10:35 AM', type: 'Absent', student: 'Ananya Reddy', text: 'Absent alert queued for 9989223344' },
+                  { time: '10:35 AM', type: 'Absent', student: 'Ananya Reddy', text: 'Absent alert sent to 9989223344' },
                   { time: '05:10 PM', type: 'Fee', student: 'Mohammed Ayaan', text: 'Fee reminder (Rs.2,150) sent' }
                 ]
               },
@@ -395,6 +433,7 @@
               id: 'pragathi-kmm',
               code: 'PRAGATHI',
               name: 'Pragathi IIT & NEET Academy',
+              tagline: 'Residential & Day Scholar Campus',
               city: 'Khammam, Telangana',
               phone: '9949011223',
               upiId: 'pragathikmm@ybl',
@@ -404,7 +443,7 @@
               logoUrl: '',
               lang: 'en-te',
               waMode: 'web',
-              cloudApi: { phoneNumberId: '', accessToken: '' },
+              cloudApi: { phoneNumberId: '', accessToken: '', templateName: '' },
               classes: [
                 { id: 'pc1', name: 'NEET Long Term', sections: ['Batch 1'], defaultFee: 3500 }
               ],
@@ -439,16 +478,16 @@
 
       const urlParams = new URLSearchParams(window.location.search);
       const ui = {
-        mode: urlParams.get('admin') === 'true' ? 'admin-gate' : 'login', // 'login' | 'admin-gate' | 'institute' | 'admin'
+        mode: urlParams.get('admin') === 'true' ? 'admin-gate' : 'login',
         instId: null,
         fromAdmin: false,
         lockTaps: 0,
-        tab: 'overview', // 'overview' | 'rollcall' | 'fees' | 'scenarios' | 'setup'
+        tab: 'overview',
         selectedDate: TODAY,
         rcClass: 'ALL',
         rcSection: 'ALL',
         rcSearch: '',
-        feeFilter: 'ALL', // 'ALL' | 'DUE' | 'PAID' | 'LEFT'
+        feeFilter: 'ALL',
         feeSearch: '',
         scenarioType: 'exam',
         scenarioTarget: 'ALL',
@@ -456,8 +495,7 @@
         scenarioText: 'Dear {parent}, Exam Fee / Hall Ticket notice for {student} ({class}). Pending due: Rs.{due}. Pay via UPI: {upi} - {inst}',
         revealedPins: {},
         showAdminCreds: false,
-        csvRaw: '',
-        csvMode: 'add'
+        bulkBatch: null
       };
 
       function toast(msg) {
@@ -466,7 +504,7 @@
         el.textContent = msg;
         el.style.display = 'block';
         clearTimeout(window._toastTimer);
-        window._toastTimer = setTimeout(() => { el.style.display = 'none'; }, 2800);
+        window._toastTimer = setTimeout(() => { el.style.display = 'none'; }, 3000);
       }
 
       function esc(str) {
@@ -520,1147 +558,4 @@
 
       function buildFeeMsg(inst, st) {
         const f = calcFee(st);
-        const upiLink = 'upi://pay?pa=' + encodeURIComponent(inst.upiId || '') + '&pn=' + encodeURIComponent(inst.name) + '&am=' + f.due + '&cu=INR';
-        const en = 'Fee Reminder - ' + inst.name + '\nDear ' + st.parent + ', pending fee for ' + st.name + ' (' + st.className + ') is Rs.' + f.due + ' (Due: ' + (st.dueDate || 'Immediate') + ').\nUPI ID: ' + (inst.upiId || 'At Counter') + '\nTap to Pay: ' + upiLink;
-        if (inst.lang === 'en-te') {
-          return en + '\n\nఫీజు రిమైండర్: ' + st.name + ' యొక్క బాకీ ఫీజు రూ.' + f.due + '. దయచేసి త్వరగా చెల్లించండి.';
-        }
-        if (inst.lang === 'en-hi') {
-          return en + '\n\nफीस रिमाइंडर: ' + st.name + ' की बकाया फीस रु.' + f.due + ' है। कृपया शीघ्र भुगतान करें।';
-        }
-        return en;
-      }
-
-      function buildReceiptMsg(inst, st, paidNow, modeStr, noteStr) {
-        const f = calcFee(st);
-        return 'FEE RECEIPT - ' + inst.name + '\nStudent: ' + st.name + ' (' + st.className + ')\nAmount Paid Now: Rs.' + paidNow + ' (' + modeStr + ')\n' + (noteStr ? 'Ref/Note: ' + noteStr + '\n' : '') + 'Remaining Balance: Rs.' + f.due + '\nThank you!';
-      }
-
-      function getCurrentInst() {
-        return db.institutes.find(i => i.id === ui.instId) || null;
-      }
-
-      function addHistory(inst, dateVal, type, student, text) {
-        if (!inst.history) inst.history = {};
-        if (!inst.history[dateVal]) inst.history[dateVal] = [];
-        const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        inst.history[dateVal].unshift({ time, type, student, text });
-      }
-
-      function openModal(htmlContent) {
-        const m = document.getElementById('modal');
-        m.innerHTML = '<div class="modal-backdrop" onclick="if(event.target===this)FP.closeModal()"><div class="modal-box">' + htmlContent + '</div></div>';
-      }
-
-      function closeModal() {
-        document.getElementById('modal').innerHTML = '';
-      }
-
-      function copyText(str, label) {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(str).then(() => toast(label || 'Copied to clipboard!')).catch(() => fallbackCopy(str, label));
-        } else {
-          fallbackCopy(str, label);
-        }
-      }
-
-      function fallbackCopy(str, label) {
-        const ta = document.createElement('textarea');
-        ta.value = str;
-        document.body.appendChild(ta);
-        ta.select();
-        try { document.execCommand('copy'); toast(label || 'Copied!'); } catch (e) { toast('Copy failed'); }
-        document.body.removeChild(ta);
-      }
-
-      function renderLogin() {
-        const isGate = ui.mode === 'admin-gate';
-        return (
-          '<div class="login-wrap">' +
-            '<div class="login-card">' +
-              '<div style="text-align:center;margin-bottom:18px;">' +
-                '<div onclick="FP.tapLock()" style="width:56px;height:56px;border-radius:16px;background:#0f172a;color:#fff;font-size:24px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;">' +
-                  (isGate ? '🛡️' : '🔒') +
-                '</div>' +
-                '<h2 style="margin:10px 0 4px;font-size:21px;font-weight:800;">' + (isGate ? 'Super Admin Verification' : 'FeePulse Institute Portal') + '</h2>' +
-                '<div class="small">' + (isGate ? 'Enter Secret Key and 4-Digit Master PIN' : 'Enter your Institute Code and 4-Digit Login PIN') + '</div>' +
-              '</div>' +
-              (isGate ? (
-                '<form onsubmit="FP.submitAdminGate(event)">' +
-                  '<div style="margin-bottom:12px;">' +
-                    '<label class="lbl">Admin Secret Key *</label>' +
-                    '<input id="inpSecretKey" class="input" type="password" autocomplete="off" placeholder="Enter Secret Key" required />' +
-                  '</div>' +
-                  '<div style="margin-bottom:14px;">' +
-                    '<label class="lbl">4-Digit Master PIN *</label>' +
-                    '<input id="inpMasterPin" class="input pin-input" type="password" inputmode="numeric" maxlength="4" pattern="[0-9]*" placeholder="••••" required />' +
-                  '</div>' +
-                  '<button type="submit" class="btn btn-dark btn-block" style="padding:12px;">Unlock Super Admin Dashboard</button>' +
-                '</form>' +
-                '<div style="margin-top:16px;padding-top:12px;border-top:1px solid #e2e8f0;text-align:center;">' +
-                  '<a href="https://wa.me/917799199452?text=' + encodeURIComponent('Hi Shiva, I need FeePulse login access / help') + '" target="_blank" rel="noopener noreferrer" style="display:block;font-size:12px;font-weight:700;color:#059669;margin-bottom:8px;">Need login access or help? Contact WhatsApp: 7799199452</a>' +
-                  '<button type="button" class="btn btn-ghost btn-sm" onclick="FP.setMode(\'login\')">Back to Institute Login</button>' +
-                '</div>'
-              ) : (
-                '<form onsubmit="FP.submitInstLogin(event)">' +
-                  '<div style="margin-bottom:12px;">' +
-                    '<label class="lbl">Institute Code *</label>' +
-                    '<input id="inpInstCode" class="input mono" type="text" autocomplete="off" placeholder="Enter Institute Code" style="text-transform:uppercase;font-weight:700;" required />' +
-                  '</div>' +
-                  '<div style="margin-bottom:14px;">' +
-                    '<label class="lbl">4-Digit Institute Login PIN *</label>' +
-                    '<input id="inpInstPin" class="input pin-input" type="password" inputmode="numeric" maxlength="4" pattern="[0-9]*" placeholder="••••" required />' +
-                  '</div>' +
-                  '<button type="submit" class="btn btn-primary btn-block" style="padding:12px;">Login to Institute Dashboard</button>' +
-                '</form>' +
-                '<div style="margin-top:16px;padding-top:12px;border-top:1px solid #e2e8f0;text-align:center;">' +
-                  '<a href="https://wa.me/917799199452?text=' + encodeURIComponent('Hi Shiva, I need FeePulse login access / help') + '" target="_blank" rel="noopener noreferrer" style="font-size:12px;font-weight:700;color:#059669;">Need login access or help? Contact WhatsApp: 7799199452</a>' +
-                '</div>'
-              )) +
-            '</div>' +
-          '</div>'
-        );
-      }
-
-      function renderSuperAdmin() {
-        const totalInst = db.institutes.length;
-        const activeInst = db.institutes.filter(i => i.status === 'active').length;
-        const totalStudents = db.institutes.reduce((sum, i) => sum + i.students.filter(s => s.status === 'active').length, 0);
-
-        let rowsHtml = db.institutes.map(inst => {
-          const stCount = inst.students.filter(s => s.status === 'active').length;
-          const isRev = !!ui.revealedPins[inst.id];
-          return (
-            '<div class="student-row">' +
-              '<div class="row-between wrap">' +
-                '<div class="row">' +
-                  '<div class="avatar" style="background:' + esc(inst.primaryColor) + ';">' +
-                    (inst.logoUrl ? '<img src="' + esc(inst.logoUrl) + '" alt="logo" />' : esc(inst.name.slice(0, 2).toUpperCase())) +
-                  '</div>' +
-                  '<div>' +
-                    '<div class="row wrap">' +
-                      '<strong>' + esc(inst.name) + '</strong>' +
-                      '<span class="badge ' + (inst.status === 'active' ? 'badge-green' : 'badge-red') + '">' + esc(inst.status.toUpperCase()) + '</span>' +
-                    '</div>' +
-                    '<div class="small">' + esc(inst.city) + ' • ' + stCount + ' Active Students</div>' +
-                    '<div class="small" style="margin-top:3px;">' +
-                      'Code: <strong class="mono">' + esc(inst.code) + '</strong> • PIN: <strong class="mono">' + (isRev ? esc(inst.pin) : '••••') + '</strong> ' +
-                      '<button type="button" class="btn btn-ghost btn-sm" style="padding:2px 7px;font-size:11px;" onclick="FP.togglePinReveal(\'' + inst.id + '\')">' + (isRev ? 'Hide' : '👁️ Show') + '</button>' +
-                    '</div>' +
-                  '</div>' +
-                '</div>' +
-                '<div class="row wrap">' +
-                  '<button type="button" class="btn btn-dark btn-sm" onclick="FP.adminOpenInst(\'' + inst.id + '\')">Open Workspace</button>' +
-                  '<button type="button" class="btn btn-outline btn-sm" onclick="FP.copyHandover(\'' + inst.id + '\')">📋 Copy Handover</button>' +
-                  '<button type="button" class="btn btn-ghost btn-sm" onclick="FP.toggleInstStatus(\'' + inst.id + '\')">' + (inst.status === 'active' ? 'Pause' : 'Activate') + '</button>' +
-                  '<button type="button" class="btn btn-danger btn-sm" onclick="FP.deleteInst(\'' + inst.id + '\')">Delete</button>' +
-                '</div>' +
-              '</div>' +
-            '</div>'
-          );
-        }).join('');
-
-        return (
-          '<div class="topbar">' +
-            '<div class="topbar-inner">' +
-              '<div class="row">' +
-                '<div class="avatar" style="background:#f59e0b;color:#0f172a;">SA</div>' +
-                '<div>' +
-                  '<div style="font-weight:800;font-size:15px;">FeePulse Super Admin</div>' +
-                  '<div style="font-size:11px;color:#94a3b8;">Agency Onboarding &amp; License Control</div>' +
-                '</div>' +
-              '</div>' +
-              '<button type="button" class="btn btn-danger btn-sm" onclick="FP.logout()">Logout 🔒</button>' +
-            '</div>' +
-          '</div>' +
-          '<div class="container">' +
-            '<div class="grid-3" style="margin-bottom:12px;">' +
-              '<div class="kpi"><div class="kpi-lbl">Total Institutes</div><div class="kpi-val">' + totalInst + '</div></div>' +
-              '<div class="kpi"><div class="kpi-lbl">Active Licenses</div><div class="kpi-val" style="color:#059669;">' + activeInst + '</div></div>' +
-              '<div class="kpi"><div class="kpi-lbl">Network Students</div><div class="kpi-val">' + totalStudents + '</div></div>' +
-            '</div>' +
-
-            '<div class="card">' +
-              '<div class="row-between" style="margin-bottom:8px;">' +
-                '<strong>Onboard New Institute (3-Min Setup)</strong>' +
-                '<span class="badge badge-blue">In-Person Setup Model</span>' +
-              '</div>' +
-              '<form onsubmit="FP.createInstitute(event)">' +
-                '<div class="grid-2" style="margin-bottom:8px;">' +
-                  '<div><label class="lbl">Institute Name *</label><input id="newInstName" class="input" placeholder="e.g. Sri Vidya Coaching" required /></div>' +
-                  '<div><label class="lbl">City / Town *</label><input id="newInstCity" class="input" placeholder="e.g. Nirmal, TS" required /></div>' +
-                '</div>' +
-                '<div class="grid-2" style="margin-bottom:8px;">' +
-                  '<div><label class="lbl">Owner WhatsApp Phone *</label><input id="newInstPhone" class="input" inputmode="numeric" placeholder="10-digit mobile" required /></div>' +
-                  '<div><label class="lbl">Institute UPI ID (For Parent Fees)</label><input id="newInstUpi" class="input" placeholder="institute@okicici" /></div>' +
-                '</div>' +
-                '<div class="grid-3" style="margin-bottom:10px;">' +
-                  '<div><label class="lbl">Unique Institute Code *</label><input id="newInstCode" class="input mono" style="text-transform:uppercase;" placeholder="e.g. SRIVIDYA" required /></div>' +
-                  '<div><label class="lbl">4-Digit Login PIN *</label><input id="newInstPin" class="input mono" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" placeholder="4 digits" required /></div>' +
-                  '<div><label class="lbl">Brand Color</label><input id="newInstColor" class="input" type="color" value="#0f766e" style="height:42px;padding:4px;" /></div>' +
-                '</div>' +
-                '<button type="submit" class="btn btn-primary btn-block">+ Create Institute &amp; Generate Credentials</button>' +
-              '</form>' +
-            '</div>' +
-
-            '<div class="card">' +
-              '<div class="row-between" style="margin-bottom:10px;">' +
-                '<strong>Registered Institutes (' + totalInst + ')</strong>' +
-                '<div class="row">' +
-                  '<button type="button" class="btn btn-outline btn-sm" onclick="FP.exportAgencyJson()">💾 Backup JSON</button>' +
-                  '<label class="btn btn-ghost btn-sm" style="margin:0;">📂 Restore JSON<input type="file" accept=".json" style="display:none;" onchange="FP.importAgencyJson(event)" /></label>' +
-                '</div>' +
-              '</div>' +
-              rowsHtml +
-            '</div>' +
-
-            '<div class="card">' +
-              '<div class="row-between" style="margin-bottom:8px;">' +
-                '<strong>Super Admin Security Credentials</strong>' +
-                '<button type="button" class="btn btn-ghost btn-sm" onclick="FP.toggleShowAdminCreds()">' + (ui.showAdminCreds ? 'Hide' : '👁️ Show Current') + '</button>' +
-              '</div>' +
-              '<form onsubmit="FP.updateAdminSecurity(event)">' +
-                '<div class="grid-2" style="margin-bottom:8px;">' +
-                  '<div><label class="lbl">New Secret Key</label><input id="updAdminSecret" class="input" type="' + (ui.showAdminCreds ? 'text' : 'password') + '" value="' + esc(db.adminSecretKey) + '" required /></div>' +
-                  '<div><label class="lbl">New 4-Digit Master PIN</label><input id="updAdminPin" class="input mono" type="' + (ui.showAdminCreds ? 'text' : 'password') + '" maxlength="4" pattern="[0-9]{4}" value="' + esc(db.masterPin) + '" required /></div>' +
-                '</div>' +
-                '<button type="submit" class="btn btn-dark btn-sm">Save Super Admin Credentials</button>' +
-              '</form>' +
-            '</div>' +
-          '</div>'
-        );
-      }
-
-      function renderInstitute() {
-        const inst = getCurrentInst();
-        if (!inst) {
-          ui.mode = 'login';
-          return renderLogin();
-        }
-        document.documentElement.style.setProperty('--primary', inst.primaryColor || '#0f766e');
-
-        const activeStudents = inst.students.filter(s => s.status === 'active');
-        const phoneCounts = {};
-        activeStudents.forEach(s => {
-          const k = cleanPhone(s.phone);
-          phoneCounts[k] = (phoneCounts[k] || 0) + 1;
-        });
-
-        let bodyHtml = '';
-        if (ui.tab === 'overview') bodyHtml = renderOverviewTab(inst, activeStudents, phoneCounts);
-        else if (ui.tab === 'rollcall') bodyHtml = renderRollCallTab(inst, activeStudents, phoneCounts);
-        else if (ui.tab === 'fees') bodyHtml = renderFeesTab(inst, phoneCounts);
-        else if (ui.tab === 'scenarios') bodyHtml = renderScenariosTab(inst, activeStudents);
-        else if (ui.tab === 'setup') bodyHtml = renderSetupTab(inst);
-
-        return (
-          (ui.fromAdmin ? (
-            '<div style="background:#f59e0b;color:#0f172a;padding:7px 12px;font-size:12px;font-weight:800;display:flex;justify-content:space-between;align-items:center;">' +
-              '<span>SUPER ADMIN PREVIEW: ' + esc(inst.name) + '</span>' +
-              '<button type="button" class="btn btn-dark btn-sm" onclick="FP.backToAdmin()">← Back to Super Admin</button>' +
-            '</div>'
-          ) : '') +
-          '<div class="topbar" style="background:' + esc(inst.primaryColor || '#0f766e') + ';border-bottom:none;">' +
-            '<div class="topbar-inner">' +
-              '<div class="row" style="min-width:0;">' +
-                '<div class="avatar" style="background:rgba(255,255,255,0.2);">' +
-                  (inst.logoUrl ? '<img src="' + esc(inst.logoUrl) + '" alt="logo" />' : esc(inst.name.slice(0, 2).toUpperCase())) +
-                '</div>' +
-                '<div style="min-width:0;">' +
-                  '<div style="font-weight:800;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + esc(inst.name) + '</div>' +
-                  '<div style="font-size:11px;opacity:0.9;">' + esc(inst.city) + '</div>' +
-                '</div>' +
-              '</div>' +
-              '<div class="row">' +
-                '<select class="select" style="padding:5px 8px;font-size:11px;font-weight:700;width:auto;border-radius:10px;" onchange="FP.setLang(this.value)">' +
-                  '<option value="en" ' + (inst.lang === 'en' ? 'selected' : '') + '>EN</option>' +
-                  '<option value="en-te" ' + (inst.lang === 'en-te' ? 'selected' : '') + '>EN + తెలుగు</option>' +
-                  '<option value="en-hi" ' + (inst.lang === 'en-hi' ? 'selected' : '') + '>EN + हिंदी</option>' +
-                '</select>' +
-                '<button type="button" class="btn btn-dark btn-sm" onclick="FP.logout()">Logout 🔒</button>' +
-              '</div>' +
-            '</div>' +
-          '</div>' +
-          '<div class="container">' + bodyHtml + '</div>' +
-          '<nav class="bottom-nav">' +
-            navButton('overview', '📊', 'Overview') +
-            navButton('rollcall', '✅', 'Roll Call') +
-            navButton('fees', '₹', 'Fees & Students') +
-            navButton('scenarios', '📢', 'Bulk Alerts') +
-            navButton('setup', '⚙️', 'Setup & API') +
-          '</nav>'
-        );
-      }
-
-      function navButton(tabKey, icon, label) {
-        return '<button type="button" class="nav-btn ' + (ui.tab === tabKey ? 'active' : '') + '" onclick="FP.setTab(\'' + tabKey + '\')"><span style="font-size:16px;">' + icon + '</span><span>' + label + '</span></button>';
-      }
-
-      function renderOverviewTab(inst, activeStudents, phoneCounts) {
-        const d = ui.selectedDate || TODAY;
-        const att = (inst.attendance && inst.attendance[d]) || { isHoliday: false, holidayReason: '', absentIds: [] };
-        const absentStudents = activeStudents.filter(s => att.absentIds.includes(s.id));
-        const dueStudents = activeStudents.filter(s => calcFee(s).due > 0);
-        const totalDue = dueStudents.reduce((sum, s) => sum + calcFee(s).due, 0);
-        const totalCollected = activeStudents.reduce((sum, s) => sum + (Number(s.paidAmount) || 0), 0);
-        const dayLogs = (inst.history && inst.history[d]) || [];
-
-        let absentHtml = '';
-        if (att.isHoliday) {
-          absentHtml = '<div class="badge badge-amber" style="padding:8px 12px;font-size:12px;">🎉 Holiday Marked (' + esc(att.holidayReason || 'Holiday / Sunday') + ') — Absent Alerts Disabled</div>';
-        } else if (absentStudents.length === 0) {
-          absentHtml = '<div class="small">No students marked absent on ' + esc(d) + '. Use Roll Call tab to mark absentees.</div>';
-        } else {
-          absentHtml = absentStudents.map(st => {
-            const isSibling = phoneCounts[cleanPhone(st.phone)] > 1;
-            const sentKey = d + '_abs_' + st.id;
-            const isSent = !!(inst.sentFlags && inst.sentFlags[sentKey]);
-            return (
-              '<div class="student-row absent">' +
-                '<div class="row-between wrap">' +
-                  '<div>' +
-                    '<div class="row wrap">' +
-                      '<strong>#' + esc(st.rollNo) + ' ' + esc(st.name) + '</strong>' +
-                      '<span class="badge">' + esc(st.className) + '</span>' +
-                      (isSibling ? '<span class="badge badge-blue">Sibling Phone</span>' : '') +
-                      (isSent ? '<span class="badge badge-green">Sent ✓</span>' : '') +
-                    '</div>' +
-                    '<div class="small">Parent: ' + esc(st.parent) + ' • ' + esc(st.phone) + '</div>' +
-                  '</div>' +
-                  '<div class="row">' +
-                    '<button type="button" class="btn btn-outline btn-sm" onclick="FP.previewMsg(\'absent\',\'' + st.id + '\')">👁️ View</button>' +
-                    '<a href="' + buildWaUrl(inst, st.phone, buildAbsentMsg(inst, st, d)) + '" target="_blank" rel="noopener noreferrer" onclick="FP.markSent(\'' + sentKey + '\',\'Absent\',\'' + esc(st.name) + '\')" class="btn btn-wa btn-sm">WhatsApp</a>' +
-                  '</div>' +
-                '</div>' +
-              '</div>'
-            );
-          }).join('');
-        }
-
-        let dueHtml = dueStudents.length === 0
-          ? '<div class="small">All active students have cleared their fees!</div>'
-          : dueStudents.map(st => {
-              const f = calcFee(st);
-              const sentKey = d + '_fee_' + st.id;
-              const isSent = !!(inst.sentFlags && inst.sentFlags[sentKey]);
-              return (
-                '<div class="student-row">' +
-                  '<div class="row-between wrap">' +
-                    '<div>' +
-                      '<div class="row wrap">' +
-                        '<strong>#' + esc(st.rollNo) + ' ' + esc(st.name) + '</strong>' +
-                        '<span class="badge badge-red">Due: Rs.' + f.due + '</span>' +
-                        (isSent ? '<span class="badge badge-green">Reminded ✓</span>' : '') +
-                      '</div>' +
-                      '<div class="small">' + esc(st.className) + ' • Parent: ' + esc(st.parent) + ' (' + esc(st.phone) + ')</div>' +
-                    '</div>' +
-                    '<div class="row">' +
-                      '<button type="button" class="btn btn-outline btn-sm" onclick="FP.previewMsg(\'fee\',\'' + st.id + '\')">👁️ View</button>' +
-                      '<a href="' + buildWaUrl(inst, st.phone, buildFeeMsg(inst, st)) + '" target="_blank" rel="noopener noreferrer" onclick="FP.markSent(\'' + sentKey + '\',\'Fee\',\'' + esc(st.name) + '\')" class="btn btn-wa btn-sm">WhatsApp</a>' +
-                    '</div>' +
-                  '</div>' +
-                '</div>'
-              );
-            }).join('');
-
-        let logsHtml = dayLogs.length === 0
-          ? '<div class="small">No sent alerts or payment receipts logged on ' + esc(d) + '.</div>'
-          : dayLogs.map(item => (
-              '<div style="padding:7px 0;border-bottom:1px solid #f1f5f9;font-size:12px;">' +
-                '<span class="badge">' + esc(item.time) + '</span> <strong>' + esc(item.student) + '</strong> — ' + esc(item.text) +
-              '</div>'
-            )).join('');
-
-        return (
-          '<div class="card">' +
-            '<div class="row-between wrap" style="margin-bottom:10px;">' +
-              '<div class="row wrap">' +
-                '<button type="button" class="pill ' + (d === TODAY ? 'active' : '') + '" onclick="FP.setDate(\'' + TODAY + '\')">Today</button>' +
-                '<button type="button" class="pill ' + (d === YESTERDAY ? 'active' : '') + '" onclick="FP.setDate(\'' + YESTERDAY + '\')">Yesterday</button>' +
-                '<input type="date" class="input" style="width:auto;padding:5px 10px;font-size:12px;" value="' + esc(d) + '" onchange="FP.setDate(this.value)" />' +
-              '</div>' +
-              '<button type="button" class="btn btn-sm ' + (att.isHoliday ? 'btn-dark' : 'btn-outline') + '" onclick="FP.toggleHoliday()">' +
-                (att.isHoliday ? 'Remove Holiday' : '🎉 Mark Holiday / Sunday') +
-              '</button>' +
-            '</div>' +
-            '<div class="grid-3">' +
-              '<div class="kpi"><div class="kpi-lbl">Absent (' + esc(d) + ')</div><div class="kpi-val" style="color:#dc2626;">' + (att.isHoliday ? 'Holiday' : absentStudents.length) + '</div></div>' +
-              '<div class="kpi"><div class="kpi-lbl">Pending Fee Due</div><div class="kpi-val" style="color:#d97706;">Rs.' + totalDue + '</div></div>' +
-              '<div class="kpi"><div class="kpi-lbl">Total Collected</div><div class="kpi-val" style="color:#059669;">Rs.' + totalCollected + '</div></div>' +
-            '</div>' +
-          '</div>' +
-
-          '<div class="card">' +
-            '<div class="row-between" style="margin-bottom:8px;">' +
-              '<strong>Absent Alert Queue (' + esc(d) + ')</strong>' +
-              '<button type="button" class="btn btn-ghost btn-sm" onclick="FP.setTab(\'rollcall\')">Edit Roll Call →</button>' +
-            '</div>' +
-            absentHtml +
-          '</div>' +
-
-          '<div class="card">' +
-            '<div class="row-between" style="margin-bottom:8px;">' +
-              '<strong>Pending Fee Reminders (' + dueStudents.length + ')</strong>' +
-              '<button type="button" class="btn btn-ghost btn-sm" onclick="FP.setTab(\'fees\')">Record Payments →</button>' +
-            '</div>' +
-            dueHtml +
-          '</div>' +
-
-          '<div class="card">' +
-            '<strong>Activity &amp; Receipt History (' + esc(d) + ')</strong>' +
-            '<div style="margin-top:6px;">' + logsHtml + '</div>' +
-          '</div>'
-        );
-      }
-
-      function renderRollCallTab(inst, activeStudents, phoneCounts) {
-        const d = ui.selectedDate || TODAY;
-        const att = (inst.attendance && inst.attendance[d]) || { isHoliday: false, holidayReason: '', absentIds: [] };
-        const classes = ['ALL', ...new Set(activeStudents.map(s => s.className))];
-        const filteredByClass = ui.rcClass === 'ALL' ? activeStudents : activeStudents.filter(s => s.className === ui.rcClass);
-        const sections = ['ALL', ...new Set(filteredByClass.map(s => s.section))];
-
-        const rollTokens = ui.rcSearch.trim().toLowerCase().split(/[\s,]+/).filter(Boolean);
-        const list = filteredByClass
-          .filter(s => ui.rcSection === 'ALL' || s.section === ui.rcSection)
-          .filter(s => {
-            if (rollTokens.length === 0) return true;
-            return rollTokens.some(tok => s.rollNo.toLowerCase() === tok || s.rollNo.toLowerCase().includes(tok) || s.name.toLowerCase().includes(tok));
-          })
-          .sort((a, b) => String(a.rollNo).localeCompare(String(b.rollNo), undefined, { numeric: true }));
-
-        return (
-          '<div class="card">' +
-            '<div class="row-between wrap" style="margin-bottom:8px;">' +
-              '<strong>Register Roll Call (' + esc(d) + ')</strong>' +
-              '<span class="small">Tap absent students only (others default Present)</span>' +
-            '</div>' +
-            '<div class="grid-3" style="margin-bottom:10px;">' +
-              '<div><label class="lbl">Class / Course</label><select class="select" onchange="FP.setRcFilter(\'rcClass\', this.value)">' +
-                classes.map(c => '<option value="' + esc(c) + '" ' + (ui.rcClass === c ? 'selected' : '') + '>' + (c === 'ALL' ? 'All Classes' : esc(c)) + '</option>').join('') +
-              '</select></div>' +
-              '<div><label class="lbl">Section / Batch</label><select class="select" onchange="FP.setRcFilter(\'rcSection\', this.value)">' +
-                sections.map(sec => '<option value="' + esc(sec) + '" ' + (ui.rcSection === sec ? 'selected' : '') + '>' + (sec === 'ALL' ? 'All Sections' : esc(sec)) + '</option>').join('') +
-              '</select></div>' +
-              '<div><label class="lbl">Quick Roll No. / Name Jump</label><input class="input" value="' + esc(ui.rcSearch) + '" oninput="FP.setRcFilter(\'rcSearch\', this.value)" placeholder="e.g. 101, 103 or Karthik" /></div>' +
-            '</div>' +
-            list.map(st => {
-              const isAbs = att.absentIds.includes(st.id);
-              const isSibling = phoneCounts[cleanPhone(st.phone)] > 1;
-              return (
-                '<div class="student-row ' + (isAbs ? 'absent' : 'present') + '" onclick="FP.toggleAbsent(\'' + st.id + '\')" style="cursor:pointer;">' +
-                  '<div class="row-between">' +
-                    '<div>' +
-                      '<div class="row wrap">' +
-                        '<strong>#' + esc(st.rollNo) + ' ' + esc(st.name) + '</strong>' +
-                        '<span class="badge">' + esc(st.className) + ' • ' + esc(st.section) + '</span>' +
-                        (isSibling ? '<span class="badge badge-blue">Sibling</span>' : '') +
-                      '</div>' +
-                      '<div class="small">Parent: ' + esc(st.parent) + ' • ' + esc(st.phone) + '</div>' +
-                    '</div>' +
-                    '<span class="badge ' + (isAbs ? 'badge-red' : 'badge-green') + '" style="font-size:12px;padding:5px 10px;">' +
-                      (isAbs ? 'ABSENT' : 'PRESENT') +
-                    '</span>' +
-                  '</div>' +
-                '</div>'
-              );
-            }).join('') +
-            '<button type="button" class="btn btn-primary btn-block" style="margin-top:8px;" onclick="FP.saveRollCallAndGo()">Save Roll Call &amp; Queue Absent Alerts (' + att.absentIds.length + ') →</button>' +
-          '</div>'
-        );
-      }
-
-      function renderFeesTab(inst, phoneCounts) {
-        const list = inst.students
-          .filter(st => {
-            const f = calcFee(st);
-            if (ui.feeFilter === 'LEFT') return st.status === 'left';
-            if (st.status === 'left') return false;
-            if (ui.feeFilter === 'DUE') return f.due > 0;
-            if (ui.feeFilter === 'PAID') return f.due === 0;
-            return true;
-          })
-          .filter(st => {
-            const q = ui.feeSearch.trim().toLowerCase();
-            if (!q) return true;
-            return st.name.toLowerCase().includes(q) || st.rollNo.toLowerCase().includes(q) || st.phone.includes(q) || st.className.toLowerCase().includes(q);
-          });
-
-        return (
-          '<div class="card">' +
-            '<div class="row-between wrap" style="margin-bottom:8px;">' +
-              '<strong>Student Fee Structures &amp; Ledger</strong>' +
-              '<button type="button" class="btn btn-primary btn-sm" onclick="FP.openStudentModal(null)">+ Add Student</button>' +
-            '</div>' +
-            '<div class="row-between wrap" style="margin-bottom:10px;">' +
-              '<div class="pill-tabs">' +
-                ['ALL', 'DUE', 'PAID', 'LEFT'].map(k => '<button type="button" class="pill ' + (ui.feeFilter === k ? 'active' : '') + '" onclick="FP.setFeeFilter(\'' + k + '\')">' + k + '</button>').join('') +
-              '</div>' +
-              '<input class="input" style="max-width:240px;padding:7px 10px;font-size:13px;" value="' + esc(ui.feeSearch) + '" oninput="FP.setFeeSearch(this.value)" placeholder="Search name, roll, phone..." />' +
-            '</div>' +
-            list.map(st => {
-              const f = calcFee(st);
-              const isSibling = phoneCounts[cleanPhone(st.phone)] > 1;
-              return (
-                '<div class="student-row">' +
-                  '<div class="row-between wrap" style="margin-bottom:6px;">' +
-                    '<div>' +
-                      '<div class="row wrap">' +
-                        '<strong>#' + esc(st.rollNo) + ' ' + esc(st.name) + '</strong>' +
-                        '<span class="badge">' + esc(st.className) + ' (' + esc(st.section) + ')</span>' +
-                        (isSibling ? '<span class="badge badge-blue">Sibling</span>' : '') +
-                        (st.status === 'left' ? '<span class="badge badge-red">Left Institute</span>' : '') +
-                      '</div>' +
-                      '<div class="small">Parent: ' + esc(st.parent) + ' • ' + esc(st.phone) + (st.lastReceipt ? ' • Last: ' + esc(st.lastReceipt) : '') + '</div>' +
-                    '</div>' +
-                    '<div style="text-align:right;">' +
-                      '<span class="badge ' + (f.due > 0 ? 'badge-red' : 'badge-green') + '" style="font-size:12px;">' + (f.due > 0 ? 'Due: Rs.' + f.due : 'Paid Full ✓') + '</span>' +
-                    '</div>' +
-                  '</div>' +
-                  '<div class="small" style="background:#f8fafc;padding:6px 8px;border-radius:8px;margin-bottom:8px;">' +
-                    'Tuition: Rs.' + st.baseFee +
-                    (st.busFee ? ' + Bus: Rs.' + st.busFee : '') +
-                    (st.examFee ? ' + Exam: Rs.' + st.examFee : '') +
-                    (st.certFee ? ' + Cert: Rs.' + st.certFee : '') +
-                    (f.disc ? ' − Scholarship/Disc: Rs.' + f.disc : '') +
-                    ' = <strong>Net: Rs.' + f.net + '</strong> | Paid: Rs.' + f.paid +
-                  '</div>' +
-                  '<div class="row wrap">' +
-                    '<button type="button" class="btn btn-primary btn-sm" onclick="FP.openPayModal(\'' + st.id + '\')">₹ Pay / Receipt</button>' +
-                    '<button type="button" class="btn btn-outline btn-sm" onclick="FP.previewMsg(\'fee\',\'' + st.id + '\')">👁️ View</button>' +
-                    '<a href="' + buildWaUrl(inst, st.phone, buildFeeMsg(inst, st)) + '" target="_blank" rel="noopener noreferrer" class="btn btn-wa btn-sm">WhatsApp</a>' +
-                    '<button type="button" class="btn btn-ghost btn-sm" onclick="FP.openStudentModal(\'' + st.id + '\')">Edit Fees</button>' +
-                    '<button type="button" class="btn btn-ghost btn-sm" onclick="FP.toggleStudentLeft(\'' + st.id + '\')">' + (st.status === 'left' ? 'Re-Activate' : 'Mark Left') + '</button>' +
-                  '</div>' +
-                '</div>'
-              );
-            }).join('') +
-          '</div>'
-        );
-      }
-
-      function renderScenariosTab(inst, activeStudents) {
-        const classes = ['ALL', ...new Set(activeStudents.map(s => s.className))];
-        const targets = activeStudents.filter(st => {
-          if (ui.scenarioClass !== 'ALL' && st.className !== ui.scenarioClass) return false;
-          if (ui.scenarioTarget === 'DUE') return calcFee(st).due > 0;
-          if (ui.scenarioTarget === 'BUS') return (Number(st.busFee) || 0) > 0;
-          if (ui.scenarioTarget === 'EXAM') return (Number(st.examFee) || 0) > 0;
-          if (ui.scenarioTarget === 'CERT') return (Number(st.certFee) || 0) > 0;
-          return true;
-        });
-
-        function formatScenario(st) {
-          const f = calcFee(st);
-          return ui.scenarioText
-            .replace(/\{student\}/g, st.name)
-            .replace(/\{parent\}/g, st.parent)
-            .replace(/\{class\}/g, st.className + ' ' + st.section)
-            .replace(/\{due\}/g, String(f.due))
-            .replace(/\{upi\}/g, inst.upiId || 'At Counter')
-            .replace(/\{inst\}/g, inst.name);
-        }
-
-        return (
-          '<div class="card">' +
-            '<div class="row-between wrap" style="margin-bottom:8px;">' +
-              '<strong>Specialized Scenario Bulk Messaging</strong>' +
-              '<span class="badge badge-blue">Mode: ' + esc(inst.waMode.toUpperCase()) + '</span>' +
-            '</div>' +
-            '<div class="pill-tabs" style="margin-bottom:8px;">' +
-              [
-                ['exam', 'Exam Fee / Hall Ticket'],
-                ['bus', 'Bus Route / Timing'],
-                ['cert', 'Certificate / TC'],
-                ['holiday', 'Holiday / PTM'],
-                ['custom', 'Custom Notice']
-              ].map(([k, lbl]) => '<button type="button" class="pill ' + (ui.scenarioType === k ? 'active' : '') + '" onclick="FP.pickScenario(\'' + k + '\')">' + lbl + '</button>').join('') +
-            '</div>' +
-            '<div class="grid-2" style="margin-bottom:8px;">' +
-              '<div><label class="lbl">Target Filter</label><select class="select" onchange="FP.setScenarioFilter(\'scenarioTarget\', this.value)">' +
-                '<option value="ALL" ' + (ui.scenarioTarget === 'ALL' ? 'selected' : '') + '>All Active Students</option>' +
-                '<option value="DUE" ' + (ui.scenarioTarget === 'DUE' ? 'selected' : '') + '>Fee Due Students Only</option>' +
-                '<option value="BUS" ' + (ui.scenarioTarget === 'BUS' ? 'selected' : '') + '>Bus Fee Students Only</option>' +
-                '<option value="EXAM" ' + (ui.scenarioTarget === 'EXAM' ? 'selected' : '') + '>Exam Fee Students Only</option>' +
-                '<option value="CERT" ' + (ui.scenarioTarget === 'CERT' ? 'selected' : '') + '>Certificate Fee Students Only</option>' +
-              '</select></div>' +
-              '<div><label class="lbl">Class Filter</label><select class="select" onchange="FP.setScenarioFilter(\'scenarioClass\', this.value)">' +
-                classes.map(c => '<option value="' + esc(c) + '" ' + (ui.scenarioClass === c ? 'selected' : '') + '>' + (c === 'ALL' ? 'All Classes' : esc(c)) + '</option>').join('') +
-              '</select></div>' +
-            '</div>' +
-            '<label class="lbl">Message Template (Variables: {student}, {parent}, {class}, {due}, {upi}, {inst})</label>' +
-            '<textarea class="textarea" rows="3" oninput="FP.updateScenarioText(this.value)">' + esc(ui.scenarioText) + '</textarea>' +
-          '</div>' +
-
-          '<div class="card">' +
-            '<div class="row-between wrap" style="margin-bottom:8px;">' +
-              '<strong>Matched Recipients (' + targets.length + ' Students)</strong>' +
-              (inst.waMode === 'cloud' ? '<button type="button" class="btn btn-wa btn-sm" onclick="FP.sendCloudBatch()">🚀 Send All via Cloud API</button>' : '<span class="small">Tap View or WhatsApp per student</span>') +
-            '</div>' +
-            targets.map(st => {
-              const msg = formatScenario(st);
-              return (
-                '<div class="student-row">' +
-                  '<div class="row-between wrap">' +
-                    '<div><strong>#' + esc(st.rollNo) + ' ' + esc(st.name) + '</strong> <span class="badge">' + esc(st.className) + '</span><div class="small">' + esc(st.parent) + ' • ' + esc(st.phone) + '</div></div>' +
-                    '<div class="row">' +
-                      '<button type="button" class="btn btn-outline btn-sm" onclick="FP.previewCustomMsg(\'' + esc(st.name) + '\',\'' + esc(st.phone) + '\',' + JSON.stringify(msg) + ')">👁️ View</button>' +
-                      '<a href="' + buildWaUrl(inst, st.phone, msg) + '" target="_blank" rel="noopener noreferrer" class="btn btn-wa btn-sm">WhatsApp</a>' +
-                    '</div>' +
-                  '</div>' +
-                '</div>'
-              );
-            }).join('') +
-          '</div>'
-        );
-      }
-
-      function renderSetupTab(inst) {
-        return (
-          '<div class="card">' +
-            '<strong>White-Label Institute Branding &amp; PIN</strong>' +
-            '<form onsubmit="FP.saveBranding(event)" style="margin-top:8px;">' +
-              '<div class="grid-2" style="margin-bottom:8px;">' +
-                '<div><label class="lbl">Institute Name</label><input id="setInstName" class="input" value="' + esc(inst.name) + '" required /></div>' +
-                '<div><label class="lbl">City / Address</label><input id="setInstCity" class="input" value="' + esc(inst.city) + '" required /></div>' +
-              '</div>' +
-              '<div class="grid-2" style="margin-bottom:8px;">' +
-                '<div><label class="lbl">Callback Phone</label><input id="setInstPhone" class="input" value="' + esc(inst.phone) + '" required /></div>' +
-                '<div><label class="lbl">Institute UPI ID</label><input id="setInstUpi" class="input" value="' + esc(inst.upiId) + '" /></div>' +
-              '</div>' +
-              '<div class="grid-3" style="margin-bottom:8px;">' +
-                '<div><label class="lbl">Theme Color</label><input id="setInstColor" class="input" type="color" value="' + esc(inst.primaryColor || '#0f766e') + '" style="height:42px;padding:4px;" /></div>' +
-                '<div><label class="lbl">4-Digit Login PIN</label><input id="setInstPin" class="input mono" type="password" maxlength="4" pattern="[0-9]{4}" value="' + esc(inst.pin) + '" required /></div>' +
-                '<div><label class="lbl">Upload Logo Image</label><input type="file" accept="image/*" class="input" style="padding:7px;" onchange="FP.uploadLogo(event)" /></div>' +
-              '</div>' +
-              '<button type="submit" class="btn btn-primary btn-sm">Save Branding &amp; Settings</button>' +
-            '</form>' +
-          '</div>' +
-
-          '<div class="card">' +
-            '<strong>WhatsApp Delivery Mode &amp; Official Cloud API</strong>' +
-            '<div class="grid-3" style="margin:8px 0;">' +
-              '<button type="button" class="btn btn-sm ' + (inst.waMode === 'mobile' ? 'btn-dark' : 'btn-outline') + '" onclick="FP.setWaMode(\'mobile\')">📱 Mobile WhatsApp (Free)</button>' +
-              '<button type="button" class="btn btn-sm ' + (inst.waMode === 'web' ? 'btn-dark' : 'btn-outline') + '" onclick="FP.setWaMode(\'web\')">💻 WhatsApp Web (Free)</button>' +
-              '<button type="button" class="btn btn-sm ' + (inst.waMode === 'cloud' ? 'btn-dark' : 'btn-outline') + '" onclick="FP.setWaMode(\'cloud\')">⚡ Meta Cloud API</button>' +
-            '</div>' +
-            '<form onsubmit="FP.saveCloudApi(event)">' +
-              '<div class="grid-2" style="margin-bottom:8px;">' +
-                '<div><label class="lbl">Meta Phone Number ID</label><input id="apiPhoneId" class="input mono" value="' + esc((inst.cloudApi && inst.cloudApi.phoneNumberId) || '') + '" placeholder="e.g. 1092837465..." /></div>' +
-                '<div><label class="lbl">Permanent System User Token</label><input id="apiToken" class="input mono" type="password" value="' + esc((inst.cloudApi && inst.cloudApi.accessToken) || '') + '" placeholder="EAAB..." /></div>' +
-              '</div>' +
-              '<button type="submit" class="btn btn-dark btn-sm">Save Cloud API Keys</button>' +
-            '</form>' +
-          '</div>' +
-
-          '<div class="card">' +
-            '<div class="row-between wrap" style="margin-bottom:8px;">' +
-              '<strong>CSV Bulk Student Importer &amp; Weekly Backup</strong>' +
-              '<div class="row">' +
-                '<button type="button" class="btn btn-outline btn-sm" onclick="FP.exportCsv()">⬇ Export CSV</button>' +
-                '<button type="button" class="btn btn-ghost btn-sm" onclick="FP.exportInstJson()">💾 JSON Backup</button>' +
-              '</div>' +
-            '</div>' +
-            '<div class="small" style="margin-bottom:6px;">Paste CSV rows: <code>RollNo, Name, Parent, Phone, Class, Section, TuitionFee, BusFee, ExamFee, CertFee, Discount, Paid, DueDate</code></div>' +
-            '<textarea id="csvPasteBox" class="textarea mono" rows="4" placeholder="108, Kiran Kumar, Suresh Kumar, 9848011122, 10th Board, Morning A, 1800, 500, 350, 0, 0, 1000, 2026-12-05"></textarea>' +
-            '<div class="row wrap" style="margin-top:8px;">' +
-              '<button type="button" class="btn btn-primary btn-sm" onclick="FP.importCsvRows(\'add\')">+ Import New Students</button>' +
-              '<button type="button" class="btn btn-outline btn-sm" onclick="FP.importCsvRows(\'update\')">🔄 Update Existing Fees/Balances</button>' +
-            '</div>' +
-          '</div>' +
-
-          '<div class="card">' +
-            '<strong>Step-by-Step Guide: Get Meta Cloud API &amp; Pay Meta Directly in INR</strong>' +
-            '<ol style="font-size:13px;padding-left:18px;margin:8px 0;color:#334155;">' +
-              '<li style="margin-bottom:6px;"><strong>Create Meta App:</strong> Visit <a href="https://developers.facebook.com/apps" target="_blank" rel="noopener noreferrer">developers.facebook.com/apps</a> → Create App → Connect with customers through WhatsApp → Link your institute Meta Business Portfolio.</li>' +
-              '<li style="margin-bottom:6px;"><strong>Verify Your Institute Phone Number:</strong> Open WhatsApp → API Setup → Add Phone Number → Verify via 6-digit SMS/Call OTP and copy your <strong>Phone Number ID</strong>.</li>' +
-              '<li style="margin-bottom:6px;"><strong>Generate Permanent Token:</strong> Go to <a href="https://business.facebook.com/settings" target="_blank" rel="noopener noreferrer">business.facebook.com/settings</a> → System Users → Add Admin System User → Assign App &amp; WhatsApp Account → Generate Token (Expiration: Never).</li>' +
-              '<li style="margin-bottom:6px;"><strong>Pay Meta Directly in INR (No Middleman):</strong> Open <a href="https://business.facebook.com/billing_hub" target="_blank" rel="noopener noreferrer">business.facebook.com/billing_hub</a> → Set Country: <strong>India</strong>, Currency: <strong>INR (₹)</strong> → Add Visa/Mastercard debit or credit card. Meta charges ~₹0.115 + GST per Utility alert directly from your card.</li>' +
-            '</ol>' +
-          '</div>'
-        );
-      }
-
-      function render() {
-        const root = document.getElementById('app');
-        if (!root) return;
-        try {
-          if (ui.mode === 'login' || ui.mode === 'admin-gate') {
-            root.innerHTML = renderLogin();
-          } else if (ui.mode === 'admin') {
-            root.innerHTML = renderSuperAdmin();
-          } else if (ui.mode === 'institute') {
-            root.innerHTML = renderInstitute();
-          } else {
-            ui.mode = 'login';
-            root.innerHTML = renderLogin();
-          }
-        } catch (err) {
-          root.innerHTML = '<div style="padding:20px;color:#b91c1c;font-family:sans-serif;"><h3>FeePulse Render Error</h3><pre>' + esc(err && err.stack ? err.stack : String(err)) + '</pre></div>';
-        }
-      }
-
-      window.FP = {
-        setMode(m) { ui.mode = m; render(); },
-        tapLock() {
-          ui.lockTaps++;
-          if (ui.lockTaps >= 5) {
-            ui.lockTaps = 0;
-            ui.mode = 'admin-gate';
-            render();
-          }
-        },
-        submitInstLogin(e) {
-          e.preventDefault();
-          const code = (document.getElementById('inpInstCode').value || '').trim().toUpperCase();
-          const pin = (document.getElementById('inpInstPin').value || '').trim();
-          const inst = db.institutes.find(i => i.code.toUpperCase() === code || i.id.toUpperCase() === code);
-          if (!inst) { toast('Institute Code not found. Contact WhatsApp: 7799199452'); return; }
-          if (inst.status !== 'active') { toast('Institute portal paused. Contact WhatsApp: 7799199452'); return; }
-          if (inst.pin !== pin) { toast('Incorrect 4-Digit PIN. Contact WhatsApp: 7799199452'); return; }
-          ui.instId = inst.id;
-          ui.fromAdmin = false;
-          ui.mode = 'institute';
-          ui.tab = 'overview';
-          render();
-        },
-        submitAdminGate(e) {
-          e.preventDefault();
-          const key = (document.getElementById('inpSecretKey').value || '').trim();
-          const pin = (document.getElementById('inpMasterPin').value || '').trim();
-          if (key !== db.adminSecretKey || pin !== db.masterPin) {
-            toast('Invalid Secret Key or Master PIN.');
-            return;
-          }
-          ui.mode = 'admin';
-          render();
-        },
-        logout() {
-          ui.instId = null;
-          ui.fromAdmin = false;
-          ui.mode = 'login';
-          toast('Logged out & locked.');
-          render();
-        },
-        togglePinReveal(id) {
-          ui.revealedPins[id] = !ui.revealedPins[id];
-          render();
-        },
-        toggleShowAdminCreds() {
-          ui.showAdminCreds = !ui.showAdminCreds;
-          render();
-        },
-        updateAdminSecurity(e) {
-          e.preventDefault();
-          const k = (document.getElementById('updAdminSecret').value || '').trim();
-          const p = (document.getElementById('updAdminPin').value || '').trim();
-          if (k.length < 4 || !/^\d{4}$/.test(p)) { toast('Enter valid Secret Key & 4-digit PIN.'); return; }
-          db.adminSecretKey = k;
-          db.masterPin = p;
-          saveDb();
-          toast('Super Admin credentials updated!');
-          render();
-        },
-        createInstitute(e) {
-          e.preventDefault();
-          const name = document.getElementById('newInstName').value.trim();
-          const city = document.getElementById('newInstCity').value.trim();
-          const phone = document.getElementById('newInstPhone').value.trim();
-          const upiId = document.getElementById('newInstUpi').value.trim();
-          const code = document.getElementById('newInstCode').value.trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
-          const pin = document.getElementById('newInstPin').value.trim();
-          const primaryColor = document.getElementById('newInstColor').value || '#0f766e';
-          if (!code || !/^\d{4}$/.test(pin)) { toast('Code & 4-digit numeric PIN required.'); return; }
-          if (db.institutes.some(i => i.code.toUpperCase() === code)) { toast('Institute Code already exists.'); return; }
-          db.institutes.unshift({
-            id: code.toLowerCase() + '-' + Date.now().toString(36),
-            code, name, city, phone, upiId, pin,
-            status: 'active', primaryColor, logoUrl: '', lang: 'en-te', waMode: 'mobile',
-            cloudApi: { phoneNumberId: '', accessToken: '' },
-            classes: [{ id: 'def1', name: 'General Batch', sections: ['Morning'], defaultFee: 1500 }],
-            students: [], attendance: {}, history: {}, sentFlags: {}
-          });
-          saveDb();
-          toast('Created ' + name + ' (' + code + ')');
-          render();
-        },
-        adminOpenInst(id) {
-          ui.instId = id;
-          ui.fromAdmin = true;
-          ui.mode = 'institute';
-          ui.tab = 'overview';
-          render();
-        },
-        backToAdmin() {
-          ui.mode = 'admin';
-          ui.fromAdmin = false;
-          render();
-        },
-        toggleInstStatus(id) {
-          const inst = db.institutes.find(i => i.id === id);
-          if (!inst) return;
-          inst.status = inst.status === 'active' ? 'suspended' : 'active';
-          saveDb();
-          render();
-        },
-        deleteInst(id) {
-          db.institutes = db.institutes.filter(i => i.id !== id);
-          saveDb();
-          toast('Institute removed.');
-          render();
-        },
-        copyHandover(id) {
-          const inst = db.institutes.find(i => i.id === id);
-          if (!inst) return;
-          const liveUrl = window.location.origin + window.location.pathname;
-          const msg = 'Welcome to FeePulse - ' + inst.name + '\nLogin Link: ' + liveUrl + '\nInstitute Code: ' + inst.code + '\n4-Digit Login PIN: ' + inst.pin + '\nNeed help? Contact Shiva on WhatsApp: 7799199452';
-          copyText(msg, 'Handover message copied!');
-        },
-        exportAgencyJson() {
-          const blob = new Blob([JSON.stringify(db, null, 2)], { type: 'application/json' });
-          const a = document.createElement('a');
-          a.href = URL.createObjectURL(blob);
-          a.download = 'feepulse-agency-backup-' + TODAY + '.json';
-          a.click();
-        },
-        importAgencyJson(ev) {
-          const file = ev.target.files && ev.target.files[0];
-          if (!file) return;
-          const r = new FileReader();
-          r.onload = () => {
-            try {
-              const parsed = JSON.parse(r.result);
-              if (parsed && Array.isArray(parsed.institutes)) {
-                db = parsed;
-                saveDb();
-                toast('Agency JSON restored!');
-                render();
-              }
-            } catch (e) { toast('Invalid JSON file.'); }
-          };
-          r.readAsText(file);
-        },
-        setTab(t) { ui.tab = t; render(); },
-        setLang(l) {
-          const inst = getCurrentInst();
-          if (inst) { inst.lang = l; saveDb(); render(); }
-        },
-        setDate(d) { ui.selectedDate = d || TODAY; render(); },
-        toggleHoliday() {
-          const inst = getCurrentInst();
-          const d = ui.selectedDate || TODAY;
-          if (!inst.attendance[d]) inst.attendance[d] = { isHoliday: false, holidayReason: '', absentIds: [] };
-          inst.attendance[d].isHoliday = !inst.attendance[d].isHoliday;
-          if (inst.attendance[d].isHoliday) inst.attendance[d].holidayReason = 'Holiday / Sunday';
-          saveDb();
-          render();
-        },
-        setRcFilter(k, v) { ui[k] = v; render(); },
-        toggleAbsent(stId) {
-          const inst = getCurrentInst();
-          const d = ui.selectedDate || TODAY;
-          if (!inst.attendance[d]) inst.attendance[d] = { isHoliday: false, holidayReason: '', absentIds: [] };
-          const arr = inst.attendance[d].absentIds;
-          const idx = arr.indexOf(stId);
-          if (idx >= 0) arr.splice(idx, 1); else arr.push(stId);
-          saveDb();
-          render();
-        },
-        saveRollCallAndGo() {
-          const inst = getCurrentInst();
-          const d = ui.selectedDate || TODAY;
-          const count = ((inst.attendance[d] && inst.attendance[d].absentIds) || []).length;
-          addHistory(inst, d, 'RollCall', 'Batch Roll Call', 'Saved roll call (' + count + ' absent)');
-          saveDb();
-          ui.tab = 'overview';
-          toast('Roll call saved!');
-          render();
-        },
-        markSent(flagKey, type, studentName) {
-          const inst = getCurrentInst();
-          if (!inst.sentFlags) inst.sentFlags = {};
-          inst.sentFlags[flagKey] = true;
-          addHistory(inst, ui.selectedDate || TODAY, type, studentName, type + ' WhatsApp message opened');
-          saveDb();
-          setTimeout(render, 200);
-        },
-        previewMsg(kind, stId) {
-          const inst = getCurrentInst();
-          const st = inst.students.find(s => s.id === stId);
-          if (!st) return;
-          const text = kind === 'absent' ? buildAbsentMsg(inst, st, ui.selectedDate || TODAY) : buildFeeMsg(inst, st);
-          this.previewCustomMsg(st.name + ' (' + st.parent + ')', st.phone, text);
-        },
-        previewCustomMsg(title, phone, text) {
-          const inst = getCurrentInst();
-          const waUrl = buildWaUrl(inst, phone, text);
-          openModal(
-            '<div class="row-between"><strong>Message Preview</strong><button type="button" class="btn btn-ghost btn-sm" onclick="FP.closeModal()">✕</button></div>' +
-            '<div class="small" style="margin-top:4px;">To: <strong>' + esc(title) + '</strong> • ' + esc(phone) + '</div>' +
-            '<pre class="msg-box">' + esc(text) + '</pre>' +
-            '<div class="row wrap">' +
-              '<button type="button" class="btn btn-outline btn-sm" onclick="FP.copyModalText()">📋 Copy Message</button>' +
-              '<a href="' + waUrl + '" target="_blank" rel="noopener noreferrer" class="btn btn-wa btn-sm" onclick="FP.closeModal()">Open WhatsApp →</a>' +
-            '</div>'
-          );
-          window._modalPreviewText = text;
-        },
-        copyModalText() {
-          copyText(window._modalPreviewText || '', 'Message copied!');
-        },
-        closeModal,
-        setFeeFilter(f) { ui.feeFilter = f; render(); },
-        setFeeSearch(q) { ui.feeSearch = q; render(); },
-        toggleStudentLeft(stId) {
-          const inst = getCurrentInst();
-          const st = inst.students.find(s => s.id === stId);
-          if (!st) return;
-          st.status = st.status === 'left' ? 'active' : 'left';
-          saveDb();
-          render();
-        },
-        openStudentModal(stId) {
-          const inst = getCurrentInst();
-          const st = stId ? inst.students.find(s => s.id === stId) : {
-            id: '', rollNo: '', name: '', parent: '', phone: '',
-            className: (inst.classes[0] && inst.classes[0].name) || '10th Board',
-            section: 'Morning A', baseFee: 1800, busFee: 0, examFee: 0, certFee: 0,
-            discountType: 'flat', discountValue: 0, discountReason: '', paidAmount: 0, dueDate: TODAY
-          };
-          openModal(
-            '<div class="row-between" style="margin-bottom:8px;"><strong>' + (stId ? 'Edit Student & Fee Components' : 'Add New Student') + '</strong><button type="button" class="btn btn-ghost btn-sm" onclick="FP.closeModal()">✕</button></div>' +
-            '<form onsubmit="FP.saveStudentForm(event, \'' + esc(st.id) + '\')">' +
-              '<div class="grid-3" style="margin-bottom:8px;">' +
-                '<div><label class="lbl">Roll No *</label><input id="stRoll" class="input" value="' + esc(st.rollNo) + '" required /></div>' +
-                '<div><label class="lbl">Student Name *</label><input id="stName" class="input" value="' + esc(st.name) + '" required /></div>' +
-                '<div><label class="lbl">Parent Phone *</label><input id="stPhone" class="input" inputmode="numeric" value="' + esc(st.phone) + '" required /></div>' +
-              '</div>' +
-              '<div class="grid-3" style="margin-bottom:8px;">' +
-                '<div><label class="lbl">Parent Name</label><input id="stParent" class="input" value="' + esc(st.parent) + '" /></div>' +
-                '<div><label class="lbl">Class / Course</label><input id="stClass" class="input" value="' + esc(st.className) + '" required /></div>' +
-                '<div><label class="lbl">Section / Batch</label><input id="stSec" class="input" value="' + esc(st.section) + '" /></div>' +
-              '</div>' +
-              '<div class="grid-2" style="margin-bottom:8px;">' +
-                '<div><label class="lbl">Tuition Fee (Rs.)</label><input id="stBase" type="number" class="input" value="' + st.baseFee + '" /></div>' +
-                '<div><label class="lbl">Bus Fee (Rs.)</label><input id="stBus" type="number" class="input" value="' + st.busFee + '" /></div>' +
-              '</div>' +
-              '<div class="grid-2" style="margin-bottom:8px;">' +
-                '<div><label class="lbl">Exam Fee (Rs.)</label><input id="stExam" type="number" class="input" value="' + st.examFee + '" /></div>' +
-                '<div><label class="lbl">Certificate / TC Fee (Rs.)</label><input id="stCert" type="number" class="input" value="' + st.certFee + '" /></div>' +
-              '</div>' +
-              '<div class="grid-3" style="margin-bottom:8px;">' +
-                '<div><label class="lbl">Scholarship / Disc Type</label><select id="stDiscType" class="select"><option value="flat" ' + (st.discountType === 'flat' ? 'selected' : '') + '>Flat Rs.</option><option value="percent" ' + (st.discountType === 'percent' ? 'selected' : '') + '>Percent %</option></select></div>' +
-                '<div><label class="lbl">Discount Value</label><input id="stDiscVal" type="number" class="input" value="' + st.discountValue + '" /></div>' +
-                '<div><label class="lbl">Due Date</label><input id="stDueDate" type="date" class="input" value="' + esc(st.dueDate || TODAY) + '" /></div>' +
-              '</div>' +
-              '<button type="submit" class="btn btn-primary btn-block">Save Student Profile</button>' +
-            '</form>'
-          );
-        },
-        saveStudentForm(e, existingId) {
-          e.preventDefault();
-          const inst = getCurrentInst();
-          const payload = {
-            rollNo: document.getElementById('stRoll').value.trim(),
-            name: document.getElementById('stName').value.trim(),
-            phone: document.getElementById('stPhone').value.trim(),
-            parent: document.getElementById('stParent').value.trim() || 'Parent',
-            className: document.getElementById('stClass').value.trim(),
-            section: document.getElementById('stSec').value.trim() || 'A',
-            baseFee: Number(document.getElementById('stBase').value) || 0,
-            busFee: Number(document.getElementById('stBus').value) || 0,
-            examFee: Number(document.getElementById('stExam').value) || 0,
-            certFee: Number(document.getElementById('stCert').value) || 0,
-            discountType: document.getElementById('stDiscType').value,
-            discountValue: Number(document.getElementById('stDiscVal').value) || 0,
-            dueDate: document.getElementById('stDueDate').value || TODAY
-          };
-          if (existingId) {
-            const st = inst.students.find(s => s.id === existingId);
-            if (st) Object.assign(st, payload);
-          } else {
-            inst.students.push(Object.assign({ id: 'st_' + Date.now().toString(36), status: 'active', paidAmount: 0, lastReceipt: '' }, payload));
-          }
-          saveDb();
-          closeModal();
-          toast('Student saved!');
-          render();
-        },
-        openPayModal(stId) {
-          const inst = getCurrentInst();
-          const st = inst.students.find(s => s.id === stId);
-          if (!st) return;
-          const f = calcFee(st);
-          openModal(
-            '<div class="row-between" style="margin-bottom:8px;"><strong>Record Partial / Full Fee Payment</strong><button type="button" class="btn btn-ghost btn-sm" onclick="FP.closeModal()">✕</button></div>' +
-            '<div class="small" style="margin-bottom:10px;">Student: <strong>' + esc(st.name) + '</strong> • Current Pending Due: <strong>Rs.' + f.due + '</strong></div>' +
-            '<form onsubmit="FP.submitPayment(event, \'' + st.id + '\')">' +
-              '<div class="grid-2" style="margin-bottom:8px;">' +
-                '<div><label class="lbl">Amount Receiving Now (Rs.) *</label><input id="payAmt" type="number" class="input" value="' + f.due + '" min="1" required /></div>' +
-                '<div><label class="lbl">Payment Mode</label><select id="payMode" class="select"><option value="Cash">Cash at Counter</option><option value="UPI">UPI / QR</option><option value="Bank">Bank Transfer</option></select></div>' +
-              '</div>' +
-              '<div class="grid-2" style="margin-bottom:10px;">' +
-                '<div><label class="lbl">UTR / Receipt Note</label><input id="payNote" class="input" placeholder="Optional UTR or note" /></div>' +
-                '<div><label class="lbl">Next Promise / Due Date</label><input id="payNextDue" type="date" class="input" value="' + esc(st.dueDate || TODAY) + '" /></div>' +
-              '</div>' +
-              '<button type="submit" class="btn btn-primary btn-block">Save Payment &amp; Prepare Receipt</button>' +
-            '</form>'
-          );
-        },
-        submitPayment(e, stId) {
-          e.preventDefault();
-          const inst = getCurrentInst();
-          const st = inst.students.find(s => s.id === stId);
-          if (!st) return;
-          const amt = Number(document.getElementById('payAmt').value) || 0;
-          const mode = document.getElementById('payMode').value;
-          const note = document.getElementById('payNote').value.trim();
-          st.paidAmount = (Number(st.paidAmount) || 0) + amt;
-          st.dueDate = document.getElementById('payNextDue').value || st.dueDate;
-          st.lastReceipt = mode + ' Rs.' + amt + (note ? ' (' + note + ')' : '');
-          const recText = buildReceiptMsg(inst, st, amt, mode, note);
-          addHistory(inst, TODAY, 'Paid', st.name, 'Paid Rs.' + amt + ' via ' + mode);
-          saveDb();
-          render();
-          this.previewCustomMsg(st.name + ' Receipt', st.phone, recText);
-        },
-        pickScenario(k) {
-          ui.scenarioType = k;
-          const presets = {
-            exam: 'Dear {parent}, Exam Fee / Hall Ticket notice for {student} ({class}). Pending due: Rs.{due}. Pay via UPI: {upi} - {inst}',
-            bus: 'Bus Alert - {inst}: Dear {parent}, transport timing/route update for {student} ({class}). Please be at the stop 10 mins early.',
-            cert: 'Certificate Notice - {inst}: Dear {parent}, Bonafide / TC / ID certificate update for {student} ({class}). Pending due: Rs.{due}.',
-            holiday: 'Holiday / PTM Notice - {inst}: Dear {parent}, institute update for {student} ({class}). Contact office for details.',
-            custom: 'Notice from {inst}: Dear {parent}, update regarding {student} ({class}).'
-          };
-          ui.scenarioText = presets[k] || presets.custom;
-          render();
-        },
-        setScenarioFilter(k, v) { ui[k] = v; render(); },
-        updateScenarioText(v) { ui.scenarioText = v; },
-        sendCloudBatch() {
-          const inst = getCurrentInst();
-          if (!inst.cloudApi || !inst.cloudApi.phoneNumberId || !inst.cloudApi.accessToken) {
-            toast('Add Meta Phone Number ID & Token in Setup & API tab first.');
-            return;
-          }
-          toast('Cloud API credentials verified. Ready for approved Meta template dispatch.');
-        },
-        saveBranding(e) {
-          e.preventDefault();
-          const inst = getCurrentInst();
-          inst.name = document.getElementById('setInstName').value.trim();
-          inst.city = document.getElementById('setInstCity').value.trim();
-          inst.phone = document.getElementById('setInstPhone').value.trim();
-          inst.upiId = document.getElementById('setInstUpi').value.trim();
-          inst.primaryColor = document.getElementById('setInstColor').value;
-          const pin = document.getElementById('setInstPin').value.trim();
-          if (/^\d{4}$/.test(pin)) inst.pin = pin;
-          saveDb();
-          toast('Institute branding updated!');
-          render();
-        },
-        uploadLogo(ev) {
-          const file = ev.target.files && ev.target.files[0];
-          const inst = getCurrentInst();
-          if (!file || !inst) return;
-          const r = new FileReader();
-          r.onload = () => {
-            inst.logoUrl = r.result;
-            saveDb();
-            toast('Logo uploaded!');
-            render();
-          };
-          r.readAsDataURL(file);
-        },
-        setWaMode(m) {
-          const inst = getCurrentInst();
-          if (inst) { inst.waMode = m; saveDb(); render(); }
-        },
-        saveCloudApi(e) {
-          e.preventDefault();
-          const inst = getCurrentInst();
-          inst.cloudApi = {
-            phoneNumberId: document.getElementById('apiPhoneId').value.trim(),
-            accessToken: document.getElementById('apiToken').value.trim()
-          };
-          saveDb();
-          toast('Cloud API credentials saved!');
-        },
-        importCsvRows(mode) {
-          const inst = getCurrentInst();
-          const raw = (document.getElementById('csvPasteBox').value || '').trim();
-          if (!raw) { toast('Paste CSV rows first.'); return; }
-          const lines = raw.split(/\r?\n/).filter(Boolean);
-          let count = 0;
-          lines.forEach(line => {
-            const cols = line.split(',').map(c => c.trim());
-            if (cols.length < 4 || cols[0].toLowerCase() === 'rollno') return;
-            const rollNo = cols[0];
-            const name = cols[1];
-            const parent = cols[2] || 'Parent';
-            const phone = cols[3];
-            const className = cols[4] || 'General';
-            const section = cols[5] || 'A';
-            const baseFee = Number(cols[6]) || 0;
-            const busFee = Number(cols[7]) || 0;
-            const examFee = Number(cols[8]) || 0;
-            const certFee = Number(cols[9]) || 0;
-            const discountValue = Number(cols[10]) || 0;
-            const paidAmount = Number(cols[11]) || 0;
-            const dueDate = cols[12] || TODAY;
-
-            const existing = inst.students.find(s => s.rollNo === rollNo && cleanPhone(s.phone) === cleanPhone(phone));
-            if (existing && mode === 'update') {
-              Object.assign(existing, { baseFee, busFee, examFee, certFee, discountValue, paidAmount, dueDate, className, section });
-              count++;
-            } else if (!existing) {
-              inst.students.push({
-                id: 'st_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5),
-                rollNo, name, parent, phone, className, section, status: 'active',
-                baseFee, busFee, examFee, certFee, discountType: 'flat', discountValue, discountReason: '',
-                paidAmount, dueDate, lastReceipt: ''
-              });
-              count++;
-            }
-          });
-          saveDb();
-          toast('Processed ' + count + ' student rows!');
-          render();
-        },
-        exportCsv() {
-          const inst = getCurrentInst();
-          const header = 'RollNo,Name,Parent,Phone,Class,Section,TuitionFee,BusFee,ExamFee,CertFee,Discount,Paid,Due,DueDate,Status';
-          const rows = inst.students.map(s => {
-            const f = calcFee(s);
-            return [s.rollNo, s.name, s.parent, s.phone, s.className, s.section, s.baseFee, s.busFee, s.examFee, s.certFee, f.disc, s.paidAmount, f.due, s.dueDate, s.status].join(',');
-          });
-          const blob = new Blob([[header, ...rows].join('\n')], { type: 'text/csv' });
-          const a = document.createElement('a');
-          a.href = URL.createObjectURL(blob);
-          a.download = inst.code.toLowerCase() + '-students-' + TODAY + '.csv';
-          a.click();
-        },
-        exportInstJson() {
-          const inst = getCurrentInst();
-          const blob = new Blob([JSON.stringify(inst, null, 2)], { type: 'application/json' });
-          const a = document.createElement('a');
-          a.href = URL.createObjectURL(blob);
-          a.download = inst.code.toLowerCase() + '-backup-' + TODAY + '.json';
-          a.click();
-        }
-      };
-
-      document.addEventListener('keydown', function (e) {
-        if (e.ctrlKey && e.shiftKey && (e.key === 'S' || e.key === 's')) {
-          e.preventDefault();
-          ui.mode = 'admin-gate';
-          render();
-        }
-      });
-
-      render();
-    })();
-  </script>
-</body>
-</html>
+        const upiLink = 'upi://pay?pa=' + encodeURIComponent(inst.upiId || '') + '&pn=' + encodeURIComponent(inst.name) + '&am=' + f.due + '&c
