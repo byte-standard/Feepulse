@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>FeePulse — Institute Fee, Attendance & WhatsApp Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand-primary: #0f766e;
+      --brand-accent: #f59e0b;
+    }
+    * { -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-in { animation: fadeSlide 0.2s ease-out; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
+
+  <!-- MAIN ROOT CONTAINER -->
+  <div id="rootApp" class="flex-1 flex flex-col"></div>
+
+  <!-- TOAST NOTIFICATION STACK -->
+  <div id="toastStack" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-md pointer-events-none space-y-2"></div>
+
+  <!-- DYNAMIC MODAL ROOT -->
+  <div id="modalRoot"></div>
+
+  <script>
+    /*************************************************************************
+     * FEEPULSE FINALIZED — GOOGLE SITES IFRAME & MULTI-TENANT ENGINE
+     * - Safe storage wrapper (localStorage + in-memory fallback for strict iframes)
+     * - Institute Login: Institute Code + 4-Digit PIN + Explicit Logout
+     * - Hidden Super Admin Gate: Secret Key ('SHIVA7799') + 4-Digit PIN ('1234')
+     *************************************************************************/
+
+    const STORAGE_KEY = 'feepulse_final_v3';
+    let memoryStorageFallback = null;
+    let isStorageSandboxed = false;
+
+    function safeGetItem(key) {
+      try {
+        return window.localStorage.getItem(key);
+      } catch (e) {
+        isStorageSandboxed = true;
+        return memoryStorageFallback;
+      }
+    }
+
+    function safeSetItem(key, val) {
+      try {
+        window.localStorage.setItem(key, val);
+      } catch (e) {
+        isStorageSandboxed = true;
+        memoryStorageFallback = val;
+      }
+    }
+
+    function getDateOffsetStr(offsetDays = 0) {
+      const d = new Date();
+      d.setDate(d.getDate() + offsetDays);
+      return d.toISOString().split('T')[0];
+    }
+
+    const TODAY = getDateOffsetStr(0);
+    const YESTERDAY = getDateOffsetStr(-1);
+    const TWO_DAYS_AGO = getDateOffsetStr(-2);
+
+    const DEFAULT_STATE = {
+      adminSecretKey: 'SHIVA7799',
+      masterPin: '1234',
+      lastLoginCode: 'APEX1',
+      institutes: [
+        {
+          id: 'apex-nirmal',
+          code: 'APEX1',
+          name: 'Apex Coaching Academy',
+          city: 'Nirmal, Telangana',
+          phone: '9848022334',
+          upiId: 'apexacademy.nirmal@okicici',
+          pin: '1111',
+          status: 'active', // 'active' | 'suspended'
+          primaryColor: '#0f766e',
+          accentColor: '#f59e0b',
+          logoUrl: '',
+          lang: 'en-te', // 'en' | 'en-te' | 'en-hi'
+          waDeliveryMode: 'mobile', // 'mobile' | 'web' | 'cloud'
+          cloudApi: {
+            phoneNumberId: '',
+            wabaId: '',
+            accessToken: ''
+          },
+          classes: [
+            { id: 'c1', name: '10th Board', sections: ['Morning A', 'Evening B'], defaultFee: 1800 },
+            { id: 'c2', name: 'Inter 1st Yr MPC', sections: ['Section A', 'Section B'], defaultFee: 2800 },
+            { id: 'c3', name: 'Inter 2nd Yr BiPC', sections: ['Morning Batch'], defaultFee: 3000 }
+          ],
+          students: [
+            {
+              id: 'st_101', rollNo: '101', name: 'Karthikeya Rao', parent: 'Srinivas Rao', phone: '9849112233',
+              className: '10th Board', section: 'Morning A', status: 'active',
+              baseFee: 1800, busFee: 600, examFee: 350, certFee: 0,
+              discountType: 'flat', discountValue: 200, discountReason: 'Merit Concession',
+              paidAmount: 1000, dueDate: TODAY, lastReceiptNote: 'Cash ₹1,000 on 05 Nov'
+            },
+            {
+              id: 'st_102', rollNo: '102', name: 'Keerthana Rao', parent: 'Srinivas Rao', phone: '9849112233',
+              className: 'Inter 1st Yr MPC', section: 'Section A', status: 'active',
+              baseFee: 2800, busFee: 600, examFee: 500, certFee: 150,
+              discountType: 'flat', discountValue: 300, discountReason: 'Sibling Discount',
+              paidAmount: 3750, dueDate: TODAY, lastReceiptNote: 'UPI UTR 429104812'
+            },
+            {
+              id: 'st_103', rollNo: '103', name: 'Mohammed Ayaan', parent: 'Mohammed Irfan', phone: '9701334455',
+              className: '10th Board', section: 'Morning A', status: 'active',
+              baseFee: 1800, busFee: 0, examFee: 350, certFee: 0,
+              discountType: 'flat', discountValue: 0, discountReason: '',
+              paidAmount: 0, dueDate: YESTERDAY, lastReceiptNote: ''
+            },
+            {
+              id: 'st_104', rollNo: '104', name: 'Ananya Reddy', parent: 'Prabhakar Reddy', phone: '9989223344',
+              className: 'Inter 2nd Yr BiPC', section: 'Morning Batch', status: 'active',
+              baseFee: 3000, busFee: 700, examFee: 500, certFee: 200,
+              discountType: 'percent', discountValue: 10, discountReason: 'Topper 10% Scholarship',
+              paidAmount: 2500, dueDate: TODAY, lastReceiptNote: 'Cash ₹2,500'
+            },
+            {
+              id: 'st_105', rollNo: '105', name: 'Sai Charan Goud', parent: 'Ramesh Goud', phone: '9440445566',
+              className: '10th Board', section: 'Evening B', status: 'active',
+              baseFee: 1800, busFee: 0, examFee: 350, certFee: 100,
+              discountType: 'flat', discountValue: 0, discountReason: '',
+              paidAmount: 2250, dueDate: TODAY, lastReceiptNote: 'UPI Full Paid'
+            },
+            {
+              id: 'st_106', rollNo: '106', name: 'Harshitha Devi', parent: 'Venkatesh Sharma', phone: '9177556677',
+              className: 'Inter 1st Yr MPC', section: 'Section B', status: 'active',
+              baseFee: 2800, busFee: 600, examFee: 500, certFee: 0,
+              discountType: 'flat', discountValue: 0, discountReason: '',
+              paidAmount: 1500, dueDate: YESTERDAY, lastReceiptNote: 'Part Cash ₹1,500'
+            },
+            {
+              id: 'st_107', rollNo: '107', name: 'Rohith Kumar', parent: 'Mahesh Kumar', phone: '9550889900',
+              className: '10th Board', section: 'Morning A', status: 'left',
+              baseFee: 1800, busFee: 0, examFee: 0, certFee: 0,
+              discountType: 'flat', discountValue: 0, discountReason: '',
+              paidAmount: 1800, dueDate: TWO_DAYS_AGO, lastReceiptNote: 'TC Issued • Settled'
+            }
+          ],
+          attendanceLogs: {
+            [TODAY]: { isHoliday: false, holidayReason: '', absentIds: ['st_101', 'st_103'], submitted: true },
+            [YESTERDAY]: { isHoliday: false, holidayReason: '', absentIds: ['st_104', 'st_106'], submitted: true },
+            [TWO_DAYS_AGO]: { isHoliday: true, holidayReason: 'Kartika Purnima Local Holiday', absentIds: [], submitted: true }
+          },
+          activityHistory: {
+            [TODAY]: [
+              { id: 'act_1', time: '09:45 AM', type: 'payment', studentName: 'Keerthana Rao', detail: 'Paid ₹3,750 via UPI (Full Settled)' }
+            ],
+            [YESTERDAY]: [
+              { id: 'act_2', time: '10:35 AM', type: 'absent', studentName: 'Ananya Reddy', detail: 'Absent Alert sent to +91 9989223344' },
+              { id: 'act_3', time: '10:36 AM', type: 'absent', studentName: 'Harshitha Devi', detail: 'Absent Alert sent to +91 9177556677' },
+              { id: 'act_4', time: '05:15 PM', type: 'fee', studentName: 'Mohammed Ayaan', detail: 'Fee Reminder (₹2,150) sent via WhatsApp' }
+            ]
+          },
+          sentTodayKeys: {}
+        },
+        {
+          id: 'pragathi-kmm',
+          code: 'PRAGATHI',
+          name: 'Pragathi IIT & NEET Academy',
+          city: 'Khammam, Telangana',
+          phone: '9949011223',
+          upiId: 'pragathikmm@ybl',
+          pin: '2222',
+          status: 'active',
+          primaryColor: '#1d4ed8',
+          accentColor: '#10b981',
+          logoUrl: '',
+          lang: 'en-te',
+          waDeliveryMode: 'web',
+          cloudApi: { phoneNumberId: '', wabaId: '', accessToken: '' },
+          classes: [
+            { id: 'pc1', name: 'NEET Long Term', sections: ['Batch 1'], defaultFee: 3500 },
+            { id: 'pc2', name: 'JEE Foundation', sections: ['Morning'], defaultFee: 2500 }
+          ],
+          students: [
+            {
+              id: 'pst_1', rollNo: '01', name: 'Aarav Varma', parent: 'Rajesh Varma', phone: '9848111222',
+              className: 'NEET Long Term', section: 'Batch 1', status: 'active',
+              baseFee: 3500, busFee: 500, examFee: 400, certFee: 0,
+              discountType: 'flat', discountValue: 400, discountReason: 'Early Bird',
+              paidAmount: 2000, dueDate: TODAY, lastReceiptNote: 'Cash ₹2,000'
+            }
+          ],
+          attendanceLogs: {
+            [TODAY]: { isHoliday: false, holidayReason: '', absentIds: ['pst_1'], submitted: true }
+          },
+          activityHistory: {},
+          sentTodayKeys: {}
+        }
+      ]
+    };
+
+    let appState = loadAppState();
+    let session = {
+      role: 'locked', // 'locked' | 'superadmin-gate' | 'institute' | 'superadmin'
+      loggedInInstId: null,
+      adminConfiguringInstId: null,
+      loginCodeInput: '',
+      revealedInstPins: {},
+      instTab: 'overview', // 'overview' | 'rollcall' | 'fees' | 'scenarios' | 'settings'
+// ... existing code ... -->
+            ${isSuperAdminGate ? `
+              <!-- SUPER ADMIN SECRET KEY + MASTER PIN FORM -->
+              <form onsubmit="submitSuperAdminGate(event)" class="space-y-3.5">
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Admin Secret Key *</label>
+                  <input id="saSecretKeyInput" type="password" autocomplete="off" autofocus placeholder="Enter Secret Key"
+                    class="w-full px-3.5 py-3 rounded-2xl border-2 border-slate-200 focus:border-slate-900 focus:outline-none bg-slate-50 font-mono font-bold text-sm" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">4-Digit Master PIN *</label>
+                  <input id="saMasterPinInput" type="password" inputmode="numeric" maxlength="4" pattern="[0-9]*" placeholder="• • • •"
+                    class="w-full text-center tracking-[0.75em] font-display font-extrabold text-2xl py-3 rounded-2xl border-2 border-slate-200 focus:border-slate-900 focus:outline-none bg-slate-50" />
+                </div>
+                <button type="submit" class="w-full py-3.5 rounded-2xl bg-slate-950 hover:bg-slate-800 text-white font-display font-bold text-sm shadow-lg transition">
+                  Unlock Super Admin Dashboard →
+                </button>
+              </form>
+
+              <div class="pt-3 border-t border-slate-100 space-y-2 text-center">
+                <a href="https://wa.me/917799199452?text=Hi%20Shiva%2C%20I%20need%20FeePulse%20login%20access%20%2F%20help" target="_blank" rel="noopener noreferrer"
+                  class="block text-[11px] font-semibold text-emerald-700 hover:text-emerald-800 underline">
+                  Need login access or help? Contact WhatsApp: 7799199452
+                </a>
+                <button onclick="exitSuperAdminGate()" class="text-[11px] text-slate-500 font-bold underline">
+                  ← Back to Institute Login
+                </button>
+              </div>
+            ` : `
+              <!-- INSTITUTE CODE + 4-DIGIT LOGIN PIN FORM -->
+              <form onsubmit="submitInstituteLogin(event)" class="space-y-3.5">
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Institute Code</label>
+                  <input id="instLoginCodeInput" type="text" autocomplete="off" value="${session.loginCodeInput}" oninput="onLoginCodeTyped(this.value)" placeholder="Enter Institute Code"
+                    class="w-full px-3.5 py-2.5 rounded-2xl border-2 border-slate-200 focus:border-slate-900 focus:outline-none bg-slate-50 font-mono font-extrabold text-sm uppercase tracking-wider" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">4-Digit Institute Login PIN</label>
+                  <input id="instLoginPinInput" type="password" inputmode="numeric" maxlength="4" pattern="[0-9]*" autofocus placeholder="• • • •"
+                    class="w-full text-center tracking-[0.75em] font-display font-extrabold text-2xl py-3 rounded-2xl border-2 border-slate-200 focus:border-slate-900 focus:outline-none bg-slate-50" />
+                </div>
+                <button type="submit" class="w-full py-3.5 rounded-2xl text-white font-display font-bold text-sm shadow-lg transition active:scale-[0.99]" style="background-color: ${previewInst.primaryColor}">
+                  Login to Institute Dashboard →
+                </button>
+              </form>
+
+              <div class="pt-3 border-t border-slate-100 text-center">
+                <a href="https://wa.me/917799199452?text=Hi%20Shiva%2C%20I%20need%20FeePulse%20login%20access%20%2F%20help" target="_blank" rel="noopener noreferrer"
+                  class="inline-flex items-center justify-center gap-1 text-[11px] font-semibold text-emerald-700 hover:text-emerald-800 underline">
+                  <span>Need login access or help? Contact WhatsApp: 7799199452</span>
+                </a>
+              </div>
+            `}
+          </div>
+        </div>
+      `;
+    }
+// ... existing code ... -->
+    function submitInstituteLogin(e) {
+      e.preventDefault();
+      const code = (document.getElementById('instLoginCodeInput')?.value || '').trim().toUpperCase();
+      const pin = (document.getElementById('instLoginPinInput')?.value || '').trim();
+
+      const inst = appState.institutes.find(i => i.code.toUpperCase() === code || i.id.toUpperCase() === code);
+      if (!inst) {
+        showToast('Institute Code not found. Contact WhatsApp: 7799199452 for access.', 'error');
+        return;
+      }
+      if (inst.status === 'suspended') {
+        showToast('This institute portal is paused. Contact WhatsApp: 7799199452.', 'error');
+        return;
+      }
+      if (pin !== inst.pin) {
+        showToast('Incorrect 4-digit PIN. Contact WhatsApp: 7799199452 if forgotten.', 'error');
+        return;
+      }
+
+      session.loggedInInstId = inst.id;
+      session.loginCodeInput = '';
+      session.role = 'institute';
+      session.instTab = 'overview';
+      saveAppState();
+      showToast(`Logged into ${inst.name}`, 'success');
+      renderRoot();
+    }
+// ... existing code ... -->
+    function logoutCurrentUser() {
+      session.loggedInInstId = null;
+      session.adminConfiguringInstId = null;
+      session.loginCodeInput = '';
+      session.role = 'locked';
+      showToast('Logged out & locked safely.', 'info');
+      renderRoot();
+    }
+// ... existing code ... -->
+            <div class="space-y-3">
+              ${appState.institutes.map(inst => {
+                const activeCount = inst.students.filter(s => s.status === 'active').length;
+                const isPinRevealed = !!session.revealedInstPins[inst.id];
+                return `
+                  <div class="bg-white rounded-3xl p-4 border border-slate-200 shadow-xs space-y-3">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                      <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-white font-display font-bold text-sm shrink-0 overflow-hidden" style="background-color: ${inst.primaryColor}">
+                          ${inst.logoUrl ? `<img src="${inst.logoUrl}" class="w-full h-full object-cover" />` : inst.name.slice(0, 2).toUpperCase()}
+                        </div>
+                        <div>
+                          <div class="flex items-center gap-2 flex-wrap">
+                            <span class="font-display font-bold text-sm text-slate-900">${inst.name}</span>
+                            <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded ${
+                              inst.status === 'active' ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-700'
+                            }">${inst.status}</span>
+                          </div>
+                          <div class="text-xs text-slate-500 mt-0.5 flex items-center gap-1.5 flex-wrap">
+                            <span>${inst.city} • ${activeCount} Students • Code: <span class="font-mono font-bold text-slate-900">${inst.code}</span> • PIN: <span class="font-mono font-bold text-slate-900">${isPinRevealed ? inst.pin : '••••'}</span></span>
+                            <button onclick="toggleRevealInstPin('${inst.id}')" class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-700">
+                              ${isPinRevealed ? 'Hide' : '👁️ Show'}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="flex items-center gap-2">
+                        <button onclick="adminToggleInstituteStatus('${inst.id}')" class="px-3 py-1.5 rounded-xl border text-xs font-bold ${
+                          inst.status === 'active'
+                            ? 'border-rose-200 bg-rose-50 text-rose-700 hover:bg-rose-100'
+                            : 'border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
+                        }">
+                          ${inst.status === 'active' ? 'Pause' : 'Activate'}
+                        </button>
+                        <button onclick="adminEnterInstitute('${inst.id}')" class="px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold">
+                          Setup / Import CSV →
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="bg-slate-50 rounded-2xl p-2.5 border border-slate-200/80 flex flex-wrap items-center justify-between gap-2 text-xs">
+                      <span class="text-slate-600">Handover Credentials: <strong>Code ${inst.code}</strong> | <strong>PIN ${isPinRevealed ? inst.pin : '••••'}</strong></span>
+                      <div class="flex items-center gap-2">
+                        <button onclick="copyHandoverMessage('${inst.id}')" class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:bg-slate-100 font-bold text-slate-800">
+                          📋 Copy Handover Msg
+                        </button>
+                        <button onclick="whatsappHandoverToOwner('${inst.id}')" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold">
+                          📲 Send to Owner
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </section>
+        </main>
+      `;
+    }
+
+    function toggleRevealInstPin(instId) {
+      session.revealedInstPins[instId] = !session.revealedInstPins[instId];
+      renderRoot();
+    }
+// ... existing code ... -->
